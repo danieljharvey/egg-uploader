@@ -3,8 +3,9 @@
 
 
 function logMiddleware(reducer) {
-  console.log("LOG", reducer[1]);
-  return reducer;
+  var state = reducer[1];
+  console.log("LOG", state);
+  return state;
 }
 
 exports.logMiddleware = logMiddleware;

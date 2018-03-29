@@ -4,18 +4,16 @@
 
 function canvasMiddleware(reducer) {
   var action = reducer[0];
-  var newState;
   var exit = 0;
   switch (action.tag | 0) {
     case 0 : 
-        newState = /* record */[
-          /* startCoord : Some */[/* record */[
-              /* x */action[0],
-              /* y */action[1]
-            ]],
-          /* endCoord : None */0
-        ];
-        break;
+        return /* record */[
+                /* startCoord : Some */[/* record */[
+                    /* x */action[0],
+                    /* y */action[1]
+                  ]],
+                /* endCoord : None */0
+              ];
     case 1 : 
     case 2 : 
         exit = 1;
@@ -23,18 +21,15 @@ function canvasMiddleware(reducer) {
     
   }
   if (exit === 1) {
-    newState = /* record */[
-      /* startCoord */reducer[1][/* startCoord */0],
-      /* endCoord : Some */[/* record */[
-          /* x */action[0],
-          /* y */action[1]
-        ]]
-    ];
+    return /* record */[
+            /* startCoord */reducer[1][/* startCoord */0],
+            /* endCoord : Some */[/* record */[
+                /* x */action[0],
+                /* y */action[1]
+              ]]
+          ];
   }
-  return /* tuple */[
-          action,
-          newState
-        ];
+  
 }
 
 exports.canvasMiddleware = canvasMiddleware;

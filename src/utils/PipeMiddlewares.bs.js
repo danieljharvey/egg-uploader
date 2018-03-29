@@ -6,7 +6,11 @@ var Curry = require("bs-platform/lib/js/curry.js");
 
 function runMiddlewares(reducer, middlewares) {
   return List.fold_right((function (middleware, data) {
-                return Curry._1(middleware, data);
+                var newState = Curry._1(middleware, data);
+                return /* tuple */[
+                        data[0],
+                        newState
+                      ];
               }), middlewares, reducer);
 }
 

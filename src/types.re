@@ -22,4 +22,4 @@ type reducerInterface = {
 
 type reducer = (action, state);
 
-type middleware = reducer => reducer;
+type middleware = reducer => state;

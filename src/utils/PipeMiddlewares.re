@@ -2,7 +2,11 @@ let runMiddlewares =
     (reducer: Types.reducer, middlewares: list(Types.middleware))
     : Types.reducer =>
   List.fold_right(
-    (middleware, data) => middleware(data),
+    (middleware, data) => {
+      let (action, _) = data;
+      let newState = middleware(data);
+      (action, newState);
+    },
     middlewares,
     reducer,
   );
