@@ -1,0 +1,9 @@
+ReactDOMRe.renderToElementWithId(
+  <Reducer
+    middlewares=[
+      LogMiddleware.logMiddleware,
+      CanvasMiddleware.canvasMiddleware,
+    ]
+  />,
+  "index2",
+);
