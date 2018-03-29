@@ -1,3 +1,4 @@
+/* Simple fold to run state through each middleware/reducer thing */
 let runMiddlewares =
     (reducer: Types.reducer, middlewares: list(Types.middleware))
     : Types.reducer =>
@@ -11,6 +12,7 @@ let runMiddlewares =
     reducer,
   );
 
+/* do all middlewares then leave */
 let pipeMiddlewares =
     (reducer: Types.reducer, middlewares: list(Types.middleware))
     : Types.state => {
@@ -18,3 +20,7 @@ let pipeMiddlewares =
   let (_, state) = piped;
   state;
 };
+
+/* runs state through all passed middlewares and triggers state update */
+let doReducer = (middlewares, action, state) =>
+  ReasonReact.Update(pipeMiddlewares((action, state), middlewares));

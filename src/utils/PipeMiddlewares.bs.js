@@ -2,6 +2,7 @@
 'use strict';
 
 var List = require("bs-platform/lib/js/list.js");
+var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 
 function runMiddlewares(reducer, middlewares) {
@@ -18,6 +19,14 @@ function pipeMiddlewares(reducer, middlewares) {
   return runMiddlewares(reducer, middlewares)[1];
 }
 
+function doReducer(middlewares, action, state) {
+  return /* Update */Block.__(0, [pipeMiddlewares(/* tuple */[
+                  action,
+                  state
+                ], middlewares)]);
+}
+
 exports.runMiddlewares = runMiddlewares;
 exports.pipeMiddlewares = pipeMiddlewares;
+exports.doReducer = doReducer;
 /* No side effect */

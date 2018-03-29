@@ -9,10 +9,7 @@ let make = (~middlewares: list(Types.middleware), ~initial, _children) => {
   ...component,
   initialState: () => initial,
   /* State transitions */
-  reducer: (action, state) =>
-    ReasonReact.Update(
-      PipeMiddlewares.pipeMiddlewares((action, state), middlewares),
-    ),
+  reducer: PipeMiddlewares.doReducer(middlewares),
   render: self => {
     let reducerInterface: Types.reducerInterface = {
       state: self.state,
