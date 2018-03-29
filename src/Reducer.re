@@ -4,10 +4,10 @@ let component = ReasonReact.reducerComponent("ReducerComponent");
 
 /* greeting and children are props. `children` isn't used, therefore ignored.
    We ignore it by prepending it with an underscore */
-let make = (~middlewares: list(Types.middleware), _children) => {
+let make = (~middlewares: list(Types.middleware), ~initial, _children) => {
   /* spread the other default fields of component here and override a few */
   ...component,
-  initialState: () => ({count: 0, show: true}: Types.state),
+  initialState: () => initial,
   /* State transitions */
   reducer: (action, state) =>
     ReasonReact.Update(

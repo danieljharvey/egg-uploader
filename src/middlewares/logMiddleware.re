@@ -1,6 +1,6 @@
 let logMiddleware: Types.middleware =
   reducer => {
-    let (action, state) = reducer;
-    Js.log3("LOG", state, action);
+    let (_, state) = reducer;
+    Js.log2("LOG", state);
     reducer;
   };

@@ -8,7 +8,7 @@ var PipeMiddlewares$ReactTemplate = require("./utils/PipeMiddlewares.bs.js");
 
 var component = ReasonReact.reducerComponent("ReducerComponent");
 
-function make(middlewares, _) {
+function make(middlewares, initial, _) {
   var newrecord = component.slice();
   newrecord[/* render */9] = (function (self) {
       var reducerInterface_000 = /* state */self[/* state */2];
@@ -20,10 +20,7 @@ function make(middlewares, _) {
       return ReasonReact.element(/* None */0, /* None */0, Canvas$ReactTemplate.make(reducerInterface, /* array */[]));
     });
   newrecord[/* initialState */10] = (function () {
-      return /* record */[
-              /* count */0,
-              /* show : true */1
-            ];
+      return initial;
     });
   newrecord[/* reducer */12] = (function (action, state) {
       return /* Update */Block.__(0, [PipeMiddlewares$ReactTemplate.pipeMiddlewares(/* tuple */[

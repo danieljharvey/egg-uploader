@@ -6,7 +6,7 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 
-var component = ReasonReact.statelessComponent("Page");
+var component = ReasonReact.statelessComponent("CanvasComponent");
 
 function make(reducerInterface, _) {
   var newrecord = component.slice();

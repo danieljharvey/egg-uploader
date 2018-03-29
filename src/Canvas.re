@@ -1,5 +1,5 @@
 /* This is the basic component. */
-let component = ReasonReact.statelessComponent("Page");
+let component = ReasonReact.statelessComponent("CanvasComponent");
 
 /* Your familiar handleClick from ReactJS. This mandatorily takes the payload,
    then the `self` record, which contains state (none here), `handle`, `reduce`

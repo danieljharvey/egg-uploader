@@ -1,7 +1,12 @@
+type coord = {
+  x: int,
+  y: int,
+};
+
 /* State declaration */
 type state = {
-  count: int,
-  show: bool,
+  startCoord: option(coord),
+  endCoord: option(coord),
 };
 
 /* Action declaration */

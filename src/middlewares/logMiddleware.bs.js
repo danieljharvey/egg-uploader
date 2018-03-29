@@ -3,7 +3,7 @@
 
 
 function logMiddleware(reducer) {
-  console.log("LOG", reducer[1], reducer[0]);
+  console.log("LOG", reducer[1]);
   return reducer;
 }
 

@@ -3,24 +3,33 @@
 
 
 function canvasMiddleware(reducer) {
-  var state = reducer[1];
   var action = reducer[0];
   var newState;
+  var exit = 0;
   switch (action.tag | 0) {
     case 0 : 
-    case 1 : 
         newState = /* record */[
-          /* count */state[/* count */0],
-          /* show */1 - state[/* show */1]
+          /* startCoord : Some */[/* record */[
+              /* x */action[0],
+              /* y */action[1]
+            ]],
+          /* endCoord : None */0
         ];
         break;
+    case 1 : 
     case 2 : 
-        newState = /* record */[
-          /* count */state[/* count */0] + 1 | 0,
-          /* show */state[/* show */1]
-        ];
+        exit = 1;
         break;
     
+  }
+  if (exit === 1) {
+    newState = /* record */[
+      /* startCoord */reducer[1][/* startCoord */0],
+      /* endCoord : Some */[/* record */[
+          /* x */action[0],
+          /* y */action[1]
+        ]]
+    ];
   }
   return /* tuple */[
           action,
