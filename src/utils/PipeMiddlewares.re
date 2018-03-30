@@ -21,7 +21,7 @@ let pipeMiddlewares =
       reducer: Types.reducer('a, 's),
       middlewares: list(Types.middleware('a, 's)),
     )
-    : Types.state => {
+    : 's => {
   let piped = runMiddlewares(reducer, middlewares);
   let (_, state) = piped;
   state;
