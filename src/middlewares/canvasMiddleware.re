@@ -1,3 +1,4 @@
+/* this reducer cares about drawing boxes on a picture and nothing else */
 let canvasMiddleware = (reducer: Types.reducer(Types.action, Types.state)) => {
   let (action: Types.action, state: Types.state) = reducer;
   switch (action) {

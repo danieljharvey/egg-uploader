@@ -1,3 +1,5 @@
+/* this reducer only cares about looking for a complete box and adding it to the list */
+/* Oh my sweet lord need to roll some sort of version of sequence to deal with validating multiple option types in a less shitty way*/
 let getBox = (startCoord, endCoord) =>
   switch (startCoord) {
   | Some(startC) =>
