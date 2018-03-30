@@ -4,19 +4,24 @@
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Reducer$ReactTemplate = require("./Reducer.bs.js");
+var BoxMiddleware$ReactTemplate = require("./middlewares/boxMiddleware.bs.js");
 var LogMiddleware$ReactTemplate = require("./middlewares/logMiddleware.bs.js");
 var CanvasMiddleware$ReactTemplate = require("./middlewares/canvasMiddleware.bs.js");
 
 var initialState = /* record */[
   /* startCoord : None */0,
-  /* endCoord : None */0
+  /* endCoord : None */0,
+  /* boxes : [] */0
 ];
 
 ReactDOMRe.renderToElementWithId(ReasonReact.element(/* None */0, /* None */0, Reducer$ReactTemplate.make(/* :: */[
-              LogMiddleware$ReactTemplate.logMiddleware,
+              CanvasMiddleware$ReactTemplate.canvasMiddleware,
               /* :: */[
-                CanvasMiddleware$ReactTemplate.canvasMiddleware,
-                /* [] */0
+                BoxMiddleware$ReactTemplate.boxMiddleware,
+                /* :: */[
+                  LogMiddleware$ReactTemplate.logMiddleware,
+                  /* [] */0
+                ]
               ]
             ], initialState, /* array */[])), "index2");
 

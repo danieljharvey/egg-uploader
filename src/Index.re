@@ -1,10 +1,11 @@
-let initialState: Types.state = {startCoord: None, endCoord: None};
+let initialState: Types.state = {startCoord: None, endCoord: None, boxes: []};
 
 ReactDOMRe.renderToElementWithId(
   <Reducer
     middlewares=[
-      LogMiddleware.logMiddleware,
       CanvasMiddleware.canvasMiddleware,
+      BoxMiddleware.boxMiddleware,
+      LogMiddleware.logMiddleware,
     ]
     initial=initialState
   />,

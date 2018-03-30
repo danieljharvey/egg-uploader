@@ -3,6 +3,7 @@
 
 
 function canvasMiddleware(reducer) {
+  var state = reducer[1];
   var action = reducer[0];
   var exit = 0;
   switch (action.tag | 0) {
@@ -12,7 +13,8 @@ function canvasMiddleware(reducer) {
                     /* x */action[0],
                     /* y */action[1]
                   ]],
-                /* endCoord : None */0
+                /* endCoord : None */0,
+                /* boxes */state[/* boxes */2]
               ];
     case 1 : 
     case 2 : 
@@ -22,11 +24,12 @@ function canvasMiddleware(reducer) {
   }
   if (exit === 1) {
     return /* record */[
-            /* startCoord */reducer[1][/* startCoord */0],
+            /* startCoord */state[/* startCoord */0],
             /* endCoord : Some */[/* record */[
                 /* x */action[0],
                 /* y */action[1]
-              ]]
+              ]],
+            /* boxes */state[/* boxes */2]
           ];
   }
   

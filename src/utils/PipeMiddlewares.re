@@ -1,7 +1,10 @@
 /* Simple fold to run state through each middleware/reducer thing */
 let runMiddlewares =
-    (reducer: Types.reducer, middlewares: list(Types.middleware))
-    : Types.reducer =>
+    (
+      reducer: Types.reducer('a, 's),
+      middlewares: list(Types.middleware('a, 's)),
+    )
+    : Types.reducer('a, 's) =>
   List.fold_right(
     (middleware, data) => {
       let (action, _) = data;
@@ -14,7 +17,10 @@ let runMiddlewares =
 
 /* do all middlewares then leave */
 let pipeMiddlewares =
-    (reducer: Types.reducer, middlewares: list(Types.middleware))
+    (
+      reducer: Types.reducer('a, 's),
+      middlewares: list(Types.middleware('a, 's)),
+    )
     : Types.state => {
   let piped = runMiddlewares(reducer, middlewares);
   let (_, state) = piped;
