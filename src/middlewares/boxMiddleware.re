@@ -17,7 +17,7 @@ let addToList = (startCoord, endCoord, boxes) =>
   };
 
 /* this takes care of adding the current coords to a list if it works */
-let boxMiddleware = (reducer: Types.reducer(Types.action, Types.state)) => {
+let boxMiddleware = (reducer: PipeTypes.reducer(Types.action, Types.state)) => {
   let (action: Types.action, state: Types.state) = reducer;
   switch (action) {
   | MouseUp(_, _) => {

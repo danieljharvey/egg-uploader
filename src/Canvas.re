@@ -12,15 +12,13 @@ let component = ReasonReact.statelessComponent("CanvasComponent");
    Which desugars to
 
    `ReasonReact.element(Page.make(~message="hello", [||]))` */
-let make = (~reducerInterface: Types.reducerInterface, _children) => {
+let make =
+    (
+      ~reducerInterface: PipeTypes.reducerInterface(Types.action, Types.state),
+      _children,
+    ) => {
   ...component,
-  render: self_ => {
-    Js.log(
-      List.map(
-        item => ReasonReact.stringToElement("Horse"),
-        reducerInterface.state.boxes,
-      ),
-    );
+  render: self_ =>
     <div>
       <canvas
         onMouseDown=(
@@ -51,6 +49,6 @@ let make = (~reducerInterface: Types.reducerInterface, _children) => {
             )
         )
       />
-    </div>;
-  },
+      <BoxList boxes=reducerInterface.state.boxes />
+    </div>,
 };

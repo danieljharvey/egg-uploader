@@ -6,7 +6,7 @@ let component = ReasonReact.reducerComponent("ReducerComponent");
    We ignore it by prepending it with an underscore */
 let make =
     (
-      ~middlewares: list(Types.middleware(Types.action, Types.state)),
+      ~middlewares: list(PipeTypes.middleware(Types.action, Types.state)),
       ~initial,
       _children,
     ) => {
@@ -16,7 +16,8 @@ let make =
   /* State transitions */
   reducer: PipeMiddlewares.doReducer(middlewares),
   render: self => {
-    let reducerInterface: Types.reducerInterface = {
+    let reducerInterface:
+      PipeTypes.reducerInterface(Types.action, Types.state) = {
       state: self.state,
       send: self.send,
     };
