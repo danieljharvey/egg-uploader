@@ -1,7 +1,11 @@
-let initialState: Types.state = {startCoord: None, endCoord: None, boxes: []};
+let initialState: CanvasTypes.state = {
+  startCoord: None,
+  endCoord: None,
+  boxes: [],
+};
 
 ReactDOMRe.renderToElementWithId(
-  <Reducer
+  <CanvasReducer
     middlewares=[
       CanvasMiddleware.canvasMiddleware,
       BoxMiddleware.boxMiddleware,
@@ -9,5 +13,5 @@ ReactDOMRe.renderToElementWithId(
     ]
     initial=initialState
   />,
-  "index2",
+  "app",
 );

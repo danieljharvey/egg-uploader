@@ -3,7 +3,10 @@ type coord = {
   y: int,
 };
 
-type box = (coord, coord);
+type box = {
+  title: string,
+  location: (coord, coord),
+};
 
 /* State declaration */
 type state = {

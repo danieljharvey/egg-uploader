@@ -1,5 +1,21 @@
 /* This is the basic component. */
-let component = ReasonReact.statelessComponent("CanvasComponent");
+type state = {ctx: ref(option(Canvas.ctx))};
+
+type action =
+  | Nope;
+
+external refToCanvas : Dom.element => Canvas.canvasElement = "%identity";
+
+let refToContext = canv =>
+  switch (Js.Nullable.toOption(canv)) {
+  | Some(canv) => Some(Canvas.getContext(refToCanvas(canv)))
+  | None => None
+  };
+
+let setCtxRef = (r, {ReasonReact.state}) => state.ctx := refToContext(r);
+
+/* wondering about Js.Nullable.to_opt? See the note below */
+let component = ReasonReact.reducerComponent("CanvasComponent");
 
 /* Your familiar handleClick from ReactJS. This mandatorily takes the payload,
    then the `self` record, which contains state (none here), `handle`, `reduce`
@@ -14,17 +30,24 @@ let component = ReasonReact.statelessComponent("CanvasComponent");
    `ReasonReact.element(Page.make(~message="hello", [||]))` */
 let make =
     (
-      ~reducerInterface: PipeTypes.reducerInterface(Types.action, Types.state),
+      ~reducerInterface:
+         PipeTypes.reducerInterface(CanvasTypes.action, CanvasTypes.state),
       _children,
     ) => {
   ...component,
-  render: self_ =>
+  initialState: () => {ctx: ref(None)},
+  reducer: (action: action, state: state) =>
+    switch (action) {
+    | _ => ReasonReact.Update(state)
+    },
+  render: self =>
     <div>
       <canvas
+        ref=(self.handle(setCtxRef))
         onMouseDown=(
           _event =>
             reducerInterface.send(
-              Types.MouseDown(
+              CanvasTypes.MouseDown(
                 ReactEventRe.Mouse.clientX(_event),
                 ReactEventRe.Mouse.clientY(_event),
               ),
@@ -33,7 +56,7 @@ let make =
         onMouseMove=(
           _event =>
             reducerInterface.send(
-              Types.MouseMove(
+              CanvasTypes.MouseMove(
                 ReactEventRe.Mouse.clientX(_event),
                 ReactEventRe.Mouse.clientY(_event),
               ),
@@ -42,7 +65,7 @@ let make =
         onMouseUp=(
           _event =>
             reducerInterface.send(
-              Types.MouseUp(
+              CanvasTypes.MouseUp(
                 ReactEventRe.Mouse.clientX(_event),
                 ReactEventRe.Mouse.clientY(_event),
               ),
@@ -51,4 +74,5 @@ let make =
       />
       <BoxList boxes=reducerInterface.state.boxes />
     </div>,
+  didUpdate: self => Js.log2("DID UPDATE", self),
 };
