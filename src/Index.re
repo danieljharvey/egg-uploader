@@ -9,7 +9,7 @@ ReactDOMRe.renderToElementWithId(
     middlewares=[
       CanvasMiddleware.canvasMiddleware,
       BoxMiddleware.boxMiddleware,
-      LogMiddleware.logMiddleware,
+      /*LogMiddleware.logMiddleware,*/
     ]
     initial=initialState
   />,

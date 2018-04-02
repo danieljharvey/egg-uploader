@@ -26,6 +26,11 @@ external getContext :
   (canvasElement, [@bs.as "2d"] _) => canvasRenderingContext2D =
   "getContext";
 
+module CanvasElement = {
+  [@bs.get] external width : canvasElement => float = "";
+  [@bs.get] external height : canvasElement => float = "";
+};
+
 /* canvas api methods */
 module Ctx = {
   [@bs.get] external canvas : ctx => canvasElement = "";
@@ -35,6 +40,7 @@ module Ctx = {
   [@bs.set] external setLineWidth : (ctx, float) => unit = "lineWidth";
   [@bs.set] external setLineCap : (ctx, string) => unit = "lineCap";
   [@bs.set] external setFont : (ctx, string) => unit = "font";
+  [@bs.send] external rect : (ctx, int, int, int, int) => unit = "rect";
   [@bs.send]
   external fillRect : (ctx, float, float, float, float) => unit = "";
   [@bs.send] external fillText : (ctx, string, float, float) => unit = "";

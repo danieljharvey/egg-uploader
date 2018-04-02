@@ -22,6 +22,6 @@ let make =
       state: self.state,
       send: self.send,
     };
-    <Canvas reducerInterface />;
+    <CanvasComponent reducerInterface />;
   },
 };
